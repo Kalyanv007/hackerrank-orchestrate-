@@ -1,0 +1,19 @@
+{
+  "name": "code",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@google/genai": "^2.8.0",
+    "csv-parser": "^3.2.1",
+    "dotenv": "^17.4.2",
+    "fast-csv": "^5.0.7"
+  },
+  "type": "module"
+}
