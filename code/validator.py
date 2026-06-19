@@ -49,6 +49,7 @@ def validate_and_clamp(raw: dict, context: dict) -> dict:
 
     Consistency rules (deterministic overrides):
       1. evidence_standard_met=false  => claim_status=not_enough_information
+      1b. wrong_object OR non_original_image in risk_flags => claim_status=contradicted
       2. claim_status=not_enough_information => severity=unknown
       3. valid_image=false => supporting_image_ids should be "none" (warn if not)
     """
@@ -71,6 +72,16 @@ def validate_and_clamp(raw: dict, context: dict) -> dict:
         # --- Consistency rule 1 ---
         if evidence_standard_met == "false":
             claim_status = "not_enough_information"
+
+        # --- Consistency rule 1b ---
+        # Submitting a wrong-object image directly contradicts the claim.
+        # non_original_image is intentionally excluded: it sets valid_image=false
+        # and evidence_standard_met=false, which already routes to not_enough_information
+        # via rule 1. Forcing contradicted was too aggressive on legitimate photos.
+        _CONTRADICTING_FLAGS = {"wrong_object"}
+        active_flags = set(risk_flags.split(";"))
+        if active_flags & _CONTRADICTING_FLAGS:
+            claim_status = "contradicted"
 
         # --- Consistency rule 2 ---
         if claim_status == "not_enough_information":

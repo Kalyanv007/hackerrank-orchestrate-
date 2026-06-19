@@ -104,7 +104,7 @@ def call_verifier(context: dict, parts: list[dict]) -> dict:
                 model=MODEL_NAME,
                 messages=messages,
                 temperature=0.0,
-                max_tokens=600,
+                max_tokens=1500,
                 response_format={"type": "json_object"},
             )
             raw_text = response.choices[0].message.content or ""
