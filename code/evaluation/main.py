@@ -23,11 +23,9 @@ sys.path.insert(0, str(CODE_DIR))
 from dotenv import load_dotenv
 load_dotenv(CODE_DIR / ".env")
 
-import google.generativeai as genai
-
 from data_loader import load_csv_as_dicts, load_user_history, load_evidence_requirements, build_context
 from prompts.claim_verifier_user_template import build_user_message_parts
-from llm_client import call_verifier, _get_system_prompt, _configure_client, _build_gemini_contents, _extract_json, _SAFETY_SETTINGS, BACKOFF_BASE, MAX_RETRIES, REQUEST_TIMEOUT
+from llm_client import call_verifier
 from validator import validate_and_clamp, fallback_row
 from schema import OUTPUT_COLUMNS
 from metrics import score_predictions, print_report
