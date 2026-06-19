@@ -1,20 +1,20 @@
 # Multi-Modal Evidence Review — Code
 
-Damage claim verifier using Google Gemini (multi-modal). Reads `dataset/claims.csv` and
+Damage claim verifier using OpenRouter (multi-modal LLMs). Reads `dataset/claims.csv` and
 produces `output.csv` with structured verdicts per claim.
 
 ## Requirements
 
 - Python 3.10+
-- A Google AI Studio API key with access to `gemini-2.5-flash` (or `gemini-2.5-pro`)
+- An [OpenRouter](https://openrouter.ai) API key with credits
 
 ## Setup
 
 ```bash
 cd code/
-pip install google-generativeai pillow python-dotenv
+pip install openai pillow python-dotenv
 cp .env.example .env
-# Edit .env and set your GEMINI_API_KEY
+# Edit .env and set your OPENROUTER_API_KEY
 ```
 
 ## Run (produce output.csv)
@@ -56,9 +56,10 @@ without evidence rules) on the 20 labeled sample rows and writes:
 ## Environment Variables
 
 | Variable | Required | Default | Description |
-|---|---|---|---|
-| `GEMINI_API_KEY` | Yes | — | Google AI Studio key |
-| `GEMINI_MODEL` | No | `gemini-2.5-flash` | Model name override |
+|---|---|---|
+|---|
+| `OPENROUTER_API_KEY` | Yes | — | Your OpenRouter API key |
+| `OPENROUTER_MODEL` | No | `google/gemini-2.5-flash` | Any multimodal model on OpenRouter |
 
 ## Notes
 
